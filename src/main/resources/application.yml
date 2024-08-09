@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: Web-shop
+  datasource:
+    url: jdbc:postgresql://localhost:5432/web_shop?createDatabaseIfNotExist=true
+    username: super_admin
+    password: SecretPass
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        hbm2ddl:
+          schema-generation:
+            script:
+              append: false
+      javax:
+        persistence:
+          create-database-schemas: true
+          schema-generation:
+            scripts:
+              action: create
+              create-target: src/init.sql
+              drop-target: src/init.sql
+              create-source: metadata
+              drop-source: metadata
+    hibernate:
+      ddl-auto: create-drop
+  servlet:
+    multipart:
+      max-file-size: 128KB
+      max-request-size: 128KB
+  http:
+    multipart:
+      enabled: false
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+        web: DEBUG
+

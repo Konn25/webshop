@@ -1,0 +1,12 @@
+services:
+  postgres:
+    container_name: 'web_shop_database'
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=web_shop'
+      - 'POSTGRES_PASSWORD=SecretPass'
+      - 'POSTGRES_USER=super_admin'
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./src/init.sql:/docker-entrypoint-initdb.d/init.sql
