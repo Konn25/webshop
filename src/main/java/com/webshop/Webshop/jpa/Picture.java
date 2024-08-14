@@ -18,8 +18,4 @@ public class Picture {
 
     String url;
 
-    @ManyToOne
-    @JoinColumn(name = "pictureId")
-    Products products;
-
 }

@@ -18,6 +18,7 @@ public class Products {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Column(insertable=false, updatable=false)
     Long productTypeId;
 
     String name;
@@ -27,6 +28,7 @@ public class Products {
     @Column(insertable=false, updatable=false)
     Long currencyId;
 
+    @Column(insertable=false, updatable=false)
     Long pictureId;
 
     int quantity;
@@ -35,17 +37,13 @@ public class Products {
     @JoinColumn(name = "currencyId")
     Currency currency;
 
+
     @ManyToOne
-    @JoinColumn(name = "productId")
-    OrderItem orderItemProduct;
+    @JoinColumn(name = "productTypeId")
+    ProductType productType;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "products", cascade = CascadeType.ALL)
-    List<ProductType> productType;
-
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "products", cascade = CascadeType.ALL)
-    List<Picture> picture;
-
-
-
+    @ManyToOne
+    @JoinColumn(name = "pictureId")
+    Picture picture;
 
 }
