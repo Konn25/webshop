@@ -37,18 +37,17 @@ public class SecurityConfiguration {
 
 
         http.
-                authorizeHttpRequests((authorizeHttpRequests) ->
+                authorizeHttpRequests(authorizeHttpRequests ->
                                               authorizeHttpRequests
                                                       .requestMatchers((NOT_LOGGED_IN.getUrls())).permitAll()
                                                       .requestMatchers(ADMIN.getUrls()).hasAuthority(ROLE_ADMIN.name())
                                                       .requestMatchers(USER.getUrls()).hasAuthority(ROLE_USER.name())
-                                                      .anyRequest().authenticated()
                 )
                 .authenticationProvider(authProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .cors((cor) -> corsFilter())
+                .cors(cor -> corsFilter())
                 .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
 
         return http.build();
@@ -64,7 +63,7 @@ public class SecurityConfiguration {
                                                           "X-Requested-With"
         ));
         corsConfiguration.setExposedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization",
-                                                          "Access-Control-Allow-Origin", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials","Access-Control-Allow-Methods"
+                                                          "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials","Access-Control-Allow-Methods"
         ));
         corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","OPTIONS", "PATCH"));
         UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
@@ -81,7 +80,6 @@ public class SecurityConfiguration {
         allowDomains[0] = "http://localhost:4200";
         allowDomains[1] = "http://localhost:8080";
 
-        System.out.println("CORS configuration....");
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {

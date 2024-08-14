@@ -19,8 +19,4 @@ public class ProductType {
 
     String name;
 
-    @ManyToOne
-    @JoinColumn(name = "productTypeId")
-    Products products;
-
 }

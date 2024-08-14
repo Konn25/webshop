@@ -32,6 +32,11 @@ public class AuthenticationService {
 
     private final UserDAO userDAO;
 
+    /**
+     * Register a user and get an authenticate token
+     * @param request
+     * @return  an authenticate token
+     */
     public AuthenticationResponse register(RegisterRequest request) {
         var user = UsersDTO.builder()
                                 .username(request.getUsername())
@@ -55,6 +60,11 @@ public class AuthenticationService {
                                      .build();
     }
 
+    /**
+     * Generate authenticate token
+     * @param request
+     * @return authenticate token
+     */
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getEmail(),

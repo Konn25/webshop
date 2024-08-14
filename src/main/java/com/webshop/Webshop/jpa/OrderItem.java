@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,8 +19,10 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Column(insertable=false, updatable=false)
     Long productId;
 
+    @Column(insertable=false, updatable=false)
     Long orderId;
 
     int orderItemQuantity;
@@ -34,11 +37,13 @@ public class OrderItem {
     Currency currency;
 
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "orderItemProduct", cascade = CascadeType.ALL)
-    List<Products> products;
 
     @ManyToOne
-    @JoinColumn(name = "orderItemsId")
+    @JoinColumn(name = "orderId")
     Orders orders;
+
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    Products products;
 
 }

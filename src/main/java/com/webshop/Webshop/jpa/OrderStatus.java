@@ -18,8 +18,4 @@ public class OrderStatus {
 
     String status;
 
-    @ManyToOne
-    @JoinColumn(name = "orderStatusId")
-    Orders orders;
-
 }

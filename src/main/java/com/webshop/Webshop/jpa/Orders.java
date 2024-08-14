@@ -21,17 +21,21 @@ public class Orders {
     @Column(insertable=false, updatable=false)
     Long userId;
 
+    @Column(insertable=false, updatable=false)
     Long orderStatusId;
 
     String date;
 
+    @Column(insertable=false, updatable=false)
     Long orderItemId;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "orders", cascade = CascadeType.ALL)
-    List<OrderItem> orderItem;
+    @ManyToOne
+    @JoinColumn(name = "orderItemId")
+    OrderItem orderItem;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "orders", cascade = CascadeType.ALL)
-    List<OrderStatus> orderStatus;
+    @ManyToOne
+    @JoinColumn(name = "orderStatusId")
+    OrderStatus orderStatus;
 
     @ManyToOne
     @JoinColumn(name = "userId")

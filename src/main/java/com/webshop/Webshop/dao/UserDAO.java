@@ -22,6 +22,11 @@ public class UserDAO {
 
     private final UsersService usersService;
 
+    /**
+     * Find user via email from the database
+     * @param email
+     * @return  user from the database or throw an exception
+     */
     public UserDetails findUserByEmail(String email) {
 
         List<UserDetails> APP_USERS = getAllUserFromDatabase();
@@ -31,6 +36,10 @@ public class UserDAO {
 
     }
 
+    /**
+     *  Return all user from the database with the right authority
+     * @return users with authority
+     */
     public List<UserDetails> getAllUserFromDatabase() {
 
         List<UserDetails> userList = new ArrayList<>();
